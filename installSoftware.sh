@@ -16,3 +16,9 @@ sudo apt-get install skype chromium-browser gparted htop texlive-full subversion
 # if [ -x /usr/bin/numlockx ]; then
 # exec /usr/bin/numlockx on
 # fi
+
+# Unicode stuff:
+# download https://github.com/osense/dotfiles/blob/master/.XCompose
+# create .xprofile and put there these lines:
+# export GTK_IM_MODULE='xim'
+# export QT_IM_MODULE='xim'
