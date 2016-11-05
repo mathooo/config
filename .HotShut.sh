@@ -14,7 +14,9 @@ done
 # check while device is up
 while [ $ON -eq 1 ]; do
 	if ! arp -an | grep -q $device_mac; then ON=0 ; fi
-	sleep 10
+	sleep 60
+	if [ $ON -eq 0 ] ; then
+		if arp -an | grep -q $device_mac; then ON=1 ; fi
 done
 
 shutdown -P now
