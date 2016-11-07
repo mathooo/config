@@ -4,7 +4,7 @@ sudo add-apt-repository ppa:ricotz/docky && sudo add-apt-repository ppa:ubuntu-t
 
 sudo apt-get update
 
-sudo apt-get install skype chromium-browser gparted htop texlive-full subversion git plank apcalc xournal steam pinta qbittorrent default-jdk openjdk-7-jdk gcc-4.9 nautilus-dropbox wine sublime-text-installer atom unetbootin wiznote python-pip numlockx vim
+sudo apt-get install skype chromium-browser gparted htop texlive-full subversion git plank apcalc xournal steam pinta qbittorrent default-jdk openjdk-7-jdk gcc-4.9 nautilus-dropbox wine sublime-text-installer atom unetbootin wiznote python-pip numlockx vim network-manager-openvpn network-manager-openvpn-gnome
 
 # Moreover:
 # sudo -H pip install thefuck ('pip install psutil' might be needed)
@@ -19,6 +19,7 @@ sudo apt-get install skype chromium-browser gparted htop texlive-full subversion
 
 # Unicode stuff:
 # download https://github.com/osense/dotfiles/blob/master/.XCompose
+# and remove first line
 # create .xprofile and put there these lines:
 # export GTK_IM_MODULE='xim'
 # export QT_IM_MODULE='xim'
