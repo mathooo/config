@@ -8,6 +8,8 @@
 # to /etc/sudoers file !
 
 device_mac="1c:87:2c:ae:60:17"
+
+nmcli nm wifi on
 nmcli con up id Hotspot
 
 ON=0
