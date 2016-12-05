@@ -99,12 +99,20 @@ function buildpdf {
 }
 export -f buildpdf
 
-# funtion for finding files in whole system
+# function for finding files in whole system
 function ff {
 	export GREP_COLORS="sl=0;0;0:ms=1;31;18"
 	find / -name $1 2>/dev/null
 }
 export -f ff
+
+# fuction for translating text with diacritics to text without them
+# it works for text in windows-1250 encoding, this can be changed manually or extended as a parameter
+function diacritics {
+	cat $1 | iconv -f windows-1250 -t ascii//TRANSLIT//IGNORE > temp.txt
+	cp temp.txt $1
+	rm temp.txt
+}
 
 
 HUGINHOME=/home/dataSSD/Programs/HUGIN_LITE_64.linux5
