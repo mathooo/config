@@ -1,6 +1,6 @@
 #! /bin/bash
 
-repos=( "/home/matho/Desktop/BCSgen" "/home/matho/Desktop/BCSLsemantics" )
+repos=( "/home/matho/Desktop/BCSgen" )
 
 for repo in "${repos[@]}"
 do

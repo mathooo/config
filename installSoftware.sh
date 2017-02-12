@@ -4,18 +4,15 @@ sudo add-apt-repository ppa:ricotz/docky -y && sudo add-apt-repository ppa:ubunt
 
 sudo apt-get update
 
-sudo apt-get -y install skype chromium-browser gparted htop texlive-full subversion git plank apcalc xournal steam pinta qbittorrent default-jdk gcc-4.9 nautilus-dropbox wine sublime-text-installer atom unetbootin wiznote python-pip numlockx vim network-manager-openvpn network-manager-openvpn-gnome
+sudo apt-get -y install skype chromium-browser gparted htop texlive-full subversion git plank apcalc xournal steam pinta qbittorrent default-jdk gcc-4.9 nautilus-dropbox wine sublime-text-installer atom unetbootin wiznote python-pip numlockx vim network-manager-openvpn network-manager-openvpn-gnome thefuck
 
 # _________________________________________________________________________________________
 # Additional customization :
 
-# Install thefuck utility
-# sudo -H pip install thefuck ('pip install psutil' might be needed) 
-# -- from Mint 18, thefuck package is recognized by apt-get !
-
 # replace /etc/bash.bashrc
+# put .bashrc to ~/
 
-# Enable Numlock on startup
+# To enable Numlock on startup
 # sudo gedit /etc/mdm/Init/Default
 # and put this inthere:
 # if [ -x /usr/bin/numlockx ]; then
