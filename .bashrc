@@ -127,3 +127,5 @@ fi
 if [ -x /usr/bin/mint-fortune ]; then
      /usr/bin/mint-fortune
 fi
+
+bind "TAB:menu-complete"; bind "set show-all-if-ambiguous on"; bind "set colored-stats on"
