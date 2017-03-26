@@ -84,9 +84,6 @@ function diacritics {
 export -f diacritics
 
 
-HUGINHOME=/home/dataSSD/Programs/HUGIN_LITE_64.linux5
-export HUGINHOME
-
 # Aliases
 alias ll='ls -al'
 alias lsal='ls -al'
@@ -104,6 +101,3 @@ alias svncom="svn commit -m \"\""
 alias c="calc"
 alias hotup="nmcli con up id Hotspot"
 alias hotdown="nmcli con down id Hotspot"
-alias python="/usr/bin/python2.7"
-alias anaconda="/home/matho/miniconda2/bin/python"
-alias pipanaconda="/home/matho/miniconda2/bin/pip"
