@@ -79,7 +79,9 @@ export -f ff
 # fuction for translating text with diacritics to text without them
 # it works for text in windows-1250 encoding, this can be changed manually or extended as a parameter
 function diacritics {
-	cat $1 | iconv -f windows-1250 -t ascii//TRANSLIT//IGNORE > $2
+	cat "$1" | iconv -f windows-1250 -t ascii//TRANSLIT//IGNORE > tmp.srt
+	cp tmp.srt "$1"
+	rm tmp.srt
 }
 export -f diacritics
 
@@ -101,3 +103,5 @@ alias svncom="svn commit -m \"\""
 alias c="calc"
 alias hotup="nmcli con up id Hotspot"
 alias hotdown="nmcli con down id Hotspot"
+alias virtualenv="/home/matho/.local/bin/virtualenv"
+alias django-admin="/home/matho/.local/bin/django-admin"
