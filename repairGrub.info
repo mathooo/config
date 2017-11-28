@@ -1,22 +1,22 @@
-fsarchiver probe detailed # Gives you a detailed description of all of the partitions including the LVM volumes
+sudo fsarchiver probe detailed # Gives you a detailed description of all of the partitions including the LVM volumes
 
-mkdir /mnt/linux
+sudo mkdir /mnt/linux
 
-mount /dev/sda2 /mnt/linux # sda2 might be different
-mount /dev/sda1 /mnt/linux/boot # This is optional if your /boot is located in a different partition
+sudo mount /dev/sda2 /mnt/linux # sda2 might be different
+sudo mount /dev/sda1 /mnt/linux/boot # This is optional if your /boot is located in a different partition
 
-mount -o bind /proc /mnt/linux/proc
-mount -o bind /dev /mnt/linux/dev
-mount -o bind /sys /mnt/linux/sys
+sudo mount -o bind /proc /mnt/linux/proc
+sudo mount -o bind /dev /mnt/linux/dev
+sudo mount -o bind /sys /mnt/linux/sys
 
-chroot /mnt/linux /bin/bash
+sudo chroot /mnt/linux /bin/bash
 
-update-grub # find all available booting devices, linux at least
-grub-install /dev/sda
+sudo update-grub # find all available booting devices, linux at least
+sudo grub-install /dev/sda
 exit
 
-umount /mnt/linux/{dev,proc,sys}
-umount /mnt/linux/boot
-umount /mnt/linux/
+sudo umount /mnt/linux/{dev,proc,sys}
+sudo umount /mnt/linux/boot
+sudo umount /mnt/linux/
 
 reboot
