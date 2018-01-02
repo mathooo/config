@@ -1,13 +1,15 @@
 #! /bin/bash
 
-sudo add-apt-repository ppa:ricotz/docky -y && sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y && sudo add-apt-repository ppa:webupd8team/sublime-text-3 -y && sudo add-apt-repository ppa:webupd8team/atom -y && sudo add-apt-repository ppa:gezakovacs/ppa -y && sudo add-apt-repository ppa:wiznote-team -y
+sudo add-apt-repository ppa:ricotz/docky -y && sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y && sudo add-apt-repository ppa:webupd8team/sublime-text-3 -y && sudo add-apt-repository ppa:webupd8team/atom -y && sudo add-apt-repository ppa:gezakovacs/ppa -y && sudo add-apt-repository ppa:wiznote-team -y && sudo add-apt-repository ppa:inkscape.dev/stable -y
 
 sudo apt-get update
 
-sudo apt-get -y install gedit skype chromium-browser gparted htop texlive-full subversion git plank apcalc xournal steam pinta qbittorrent default-jdk gcc-4.9 nautilus-dropbox wine sublime-text-installer atom unetbootin wiznote python-pip numlockx vim network-manager-openvpn network-manager-openvpn-gnome thefuck
+sudo apt-get -y install gedit skype chromium-browser gparted htop texlive-full subversion git plank apcalc xournal steam pinta qbittorrent default-jdk gcc-4.9 nautilus-dropbox wine sublime-text-installer unetbootin python-pip numlockx vim network-manager-openvpn network-manager-openvpn-gnome thefuck evince inkscape
 
 # _________________________________________________________________________________________
-# Additional customization :
+# Additional customization & software:
+
+# https://simplenote.com/
 
 # replace /etc/bash.bashrc
 # put .bashrc to ~/
