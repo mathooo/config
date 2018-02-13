@@ -1,8 +1,8 @@
 #! /bin/bash
 
-repos=( "/home/matho/Desktop/BCSgen" )
+FILES=/path/to/*
 
-for repo in "${repos[@]}"
+for repo in $FILES
 do
 	git -C $repo pull
 done
