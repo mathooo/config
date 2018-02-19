@@ -4,7 +4,7 @@ sudo add-apt-repository ppa:ricotz/docky -y && sudo add-apt-repository ppa:ubunt
 
 sudo apt-get update
 
-sudo apt-get -y install gedit skype chromium-browser gparted htop texlive-full subversion git plank apcalc xournal steam pinta qbittorrent default-jdk gcc-4.9 nautilus-dropbox wine sublime-text-installer unetbootin python-pip numlockx vim network-manager-openvpn network-manager-openvpn-gnome thefuck evince inkscape
+sudo apt-get -y install gedit chromium-browser gparted htop texlive-full subversion git plank apcalc xournal steam pinta qbittorrent default-jdk gcc-4.9 nautilus-dropbox wine sublime-text-installer unetbootin python-pip numlockx vim network-manager-openvpn network-manager-openvpn-gnome thefuck evince inkscape
 
 # _________________________________________________________________________________________
 # Additional customization & software:
