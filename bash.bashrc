@@ -85,19 +85,6 @@ function diacritics {
 }
 export -f diacritics
 
-FOLDER="/home/xtrojak/tisk/"	# location where files are stored on external adress
-SERVER="anxur.fi.muni.cz"	# server adress
-USER="xtrojak"			# user name on the server
-PRINTER="lj4a"			# printer name
-
-function fiprint {
-	echo "Sending ..."
-	scp "$1" $USER"@"$SERVER":"$FOLDER
-	echo "Your document is being printed."
-	ssh $USER"@"$SERVER "lpr -P"$PRINTER" "$FOLDER"`basename "$1"`"
-}
-export -f fiprint
-
 # Aliases
 alias ll='ls -al'
 alias lsal='ls -al'
@@ -117,3 +104,4 @@ alias hotup="nmcli con up id Hotspot"
 alias hotdown="nmcli con down id Hotspot"
 alias virtualenv="/home/matho/.local/bin/virtualenv"
 alias django-admin="/home/matho/.local/bin/django-admin"
+alias printFI="python3 /home/xtrojak/Documents/GITs/config/printFI.py"
