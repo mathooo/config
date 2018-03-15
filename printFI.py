@@ -13,8 +13,8 @@ The script requires packages paramiko and scp (both can be installed using pip).
 # The following constants can be edited according to the specific location of files, 
 # print server and username, eventually printer names.
 
-USER = "xtrojak"													# user name on the server
-FOLDER = "/home/xtrojak/tisk/"										# location where files are stored on external adress
+USER = "username"													# user name on the server
+FOLDER = "/home/username/folder/"										# location where files are stored on external adress
 SERVER = "anxur.fi.muni.cz"											# server adress
 PRINTER_SINGLE = "lj4a"												# printer name for simple printing
 PRINTER_DUPLEX = "copy4a-duplex -o sides=two-sided-long-edge"		# printer name for duplex printing
@@ -23,6 +23,12 @@ PRINTER_DUPLEX = "copy4a-duplex -o sides=two-sided-long-edge"		# printer name fo
 
 import os
 import sys
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--file', help='the file to be printed')
+parser.add_argument('--copies', type=int, help='number of copies', default=1)
+parser.add_argument('--duplex', help='choose for duplex', default=False)
 
 def error(msg):
 	print(msg)
@@ -86,9 +92,24 @@ def printFile(file, printer, copies):
 	sftp.close()
 	ssh.close()
 
-copies, duplex = handleArguments(sys.argv[2:])
+if __name__ == '__main__':
+  args = parser.parse_args()
+  try:
+    from paramiko import SSHClient
+  except ImportError:
+    error("Package 'paramiko' is required.")
+  try:
+    from scp import SCPClient
+  except ImportError:
+    error("Package 'scp' is required.")
 
-if duplex:
-	printFile(sys.argv[1], PRINTER_DUPLEX, copies)
-else:
-	printFile(sys.argv[1], PRINTER_SINGLE, copies)
+  if args.copies:
+    copies=args.copies
+  else:
+    copies=1
+
+  if args.duplex:
+    printFile(args.file, PRINTER_DUPLEX, copies)
+  else:
+    printFile(args.file, PRINTER_SINGLE, copies)
+  	
