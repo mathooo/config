@@ -4,6 +4,8 @@ Arguments
 file: 		the file to be printed (obligatory)
 copies: 	number of copies
 duplex:		choose 's' for single and 'd' for duplex
+
+The script requires packages paramiko and scp (both can be installed using pip).
 """
 
 # ---------------------------------------------------------
@@ -21,6 +23,19 @@ PRINTER_DUPLEX = "copy4a-duplex -o sides=two-sided-long-edge"		# printer name fo
 
 import os
 import sys
+
+def error(msg):
+	print(msg)
+	sys.exit(1)
+
+try:
+	from paramiko import SSHClient
+except ImportError:
+	error("Package 'paramiko' is required.")
+try:
+	from scp import SCPClient
+except ImportError:
+	error("Package 'scp' is required.")
 
 """
 Function handleArguments
@@ -54,8 +69,22 @@ Using SSH connects to the SERVER and prints given 'file'.
 return: None
 """
 def printFile(file, printer, copies):
-	os.system("scp " + file + " " + USER + "@" + SERVER + ":" + FOLDER)
-	os.system("ssh " + USER + "@" + SERVER + " \"lpr -P " + printer + " -# " + str(copies) + " " + FOLDER + os.path.basename(file) + "\"")
+	ssh = SSHClient() 
+	ssh.load_system_host_keys()
+
+	# connect to the server
+	ssh.connect(SERVER, username=USER)
+	sftp = ssh.open_sftp()
+
+	# copy the file
+	sftp.put(file, FOLDER + os.path.basename(file))
+
+	# print the file
+	ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command("lpr -P " + printer + " -# " + str(copies) + " " + FOLDER + os.path.basename(file))
+	print(ssh_stderr)
+
+	sftp.close()
+	ssh.close()
 
 copies, duplex = handleArguments(sys.argv[2:])
 
