@@ -14,7 +14,7 @@ The script requires packages paramiko and scp (both can be installed using pip).
 # print server and username, eventually printer names.
 
 USER = "username"													# user name on the server
-FOLDER = "/home/username/folder/"									# location where files are stored on external adress
+FOLDER = "/home/username/tisk/"										# location where files are stored on external adress
 SERVER = "anxur.fi.muni.cz"											# server adress
 PRINTER_SINGLE = "lj4a"												# printer name for simple printing
 PRINTER_DUPLEX = "copy4a-duplex -o sides=two-sided-long-edge"		# printer name for duplex printing
@@ -34,15 +34,13 @@ def error(msg):
 	print(msg)
 	sys.exit(1)
 
-def SSHerrorPrint(ssh_stdin, ssh_stdout, ssh_stderr):
-	print("SSH standard input:")
-	print(ssh_stdin)
-	print("-" * 20)
-	print("SSH standard output:")
-	print(ssh_stdout)
-	print("-" * 20)
+def SSHerrorPrint(ssh_stderr):
 	print("SSH error output:")
-	print(ssh_stderr)
+	error = ssh_stderr.read().decode('ascii').strip("\n")
+	if error:
+		print(error)
+	else:
+		print("No errors.")
 	print("-" * 20)
 
 """
@@ -66,7 +64,7 @@ def printFile(file, printer, copies):
 
 	# print the file
 	ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command("lpr -P " + printer + " -# " + str(copies) + " " + FOLDER + os.path.basename(file))
-	SSHerrorPrint(ssh_stdin, ssh_stdout, ssh_stderr)
+	SSHerrorPrint(ssh_stderr)
 
 	sftp.close()
 	ssh.close()
