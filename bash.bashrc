@@ -76,6 +76,22 @@ function ff {
 }
 export -f ff
 
+# function for finding substring inside all files in a directory
+function fs {
+	for file in `find ./$1 -type f`
+	do
+	    result=`grep -nr $2 $file` 
+	    if [[ $? -eq 0 ]]
+	    then
+		echo "-----------------------------------------------------"
+		echo $file " :"
+		echo "$result"
+		echo
+	    fi
+	done
+}
+export -f fs
+
 # fuction for translating text with diacritics to text without them
 # it works for text in windows-1250 encoding, this can be changed manually or extended as a parameter
 function diacritics {
