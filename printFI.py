@@ -16,8 +16,9 @@ The script requires packages paramiko and scp (both can be installed using pip).
 USER = "username"													# user name on the server
 FOLDER = "/home/username/tisk/"										# location where files are stored on external adress
 SERVER = "anxur.fi.muni.cz"											# server adress
-PRINTER_SINGLE = "lj4a"												# printer name for simple printing
-PRINTER_DUPLEX = "copy4a-duplex -o sides=two-sided-long-edge"		# printer name for duplex printing
+PRINTER_GRAY = "lj4a"												# printer name for gray-scale printing
+PRINTER_COLOUR = "copy4a"											# printer name for colourful printing
+PRINTER_DUPLEX = "copy4a-duplex -o sides=two-sided-long-edge"		# duplex option
 
 # ---------------------------------------------------------
 
@@ -27,7 +28,8 @@ import sys
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('file', metavar='file', type=str, help='the file to be printed')
-parser.add_argument('-c', '--copies', type=int, help='number of copies', default=1)
+parser.add_argument('-n', '--number', type=int, help='number of copies', default=1)
+parser.add_argument('-c', '--colour', help='colourful printing', action='store_true', default=False)
 parser.add_argument('-d', '--duplex', help='duplex printing', action='store_true', default=False)
 
 def error(msg):
@@ -80,12 +82,18 @@ if __name__ == '__main__':
 	except ImportError:
 		error("Package 'scp' is required.")
 
-	if args.copies:
-		copies=args.copies
+	if args.number:
+		copies=args.number
 	else:
 		copies=1
 
-	if args.duplex:
-		printFile(args.file, PRINTER_DUPLEX, copies)
+	if args.colour:
+		if args.duplex:
+			printFile(args.file, PRINTER_DUPLEX, copies)
+		else:
+			printFile(args.file, PRINTER_COLOUR, copies)
 	else:
-		printFile(args.file, PRINTER_SINGLE, copies)
+		if args.duplex:
+			printFile(args.file, PRINTER_DUPLEX, copies)
+		else:
+			printFile(args.file, PRINTER_GRAY, copies)
