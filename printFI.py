@@ -24,6 +24,7 @@ PRINTER_DUPLEX = "copy4a-duplex -o sides=two-sided-long-edge"		# duplex option
 
 import os
 import sys
+import re
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -38,7 +39,7 @@ def error(msg):
 
 def SSHerrorPrint(ssh_stderr):
 	print("SSH error output:")
-	error = ssh_stderr.read().decode('ascii').strip("\n")
+	error = ssh_stderr.read().decode('utf-8').strip("\n")
 	if error:
 		print(error)
 	else:
@@ -65,7 +66,7 @@ def printFile(file, printer, copies):
 	sftp.put(file, FOLDER + os.path.basename(file))
 
 	# print the file
-	ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command("lpr -P " + printer + " -# " + str(copies) + " " + FOLDER + os.path.basename(file))
+	ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command("lpr -P " + printer + " -# " + str(copies) + " " + FOLDER + re.escape(os.path.basename(file)))
 	SSHerrorPrint(ssh_stderr)
 
 	sftp.close()
