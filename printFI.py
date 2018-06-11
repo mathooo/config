@@ -10,12 +10,9 @@ The script requires packages paramiko and scp (both can be installed using pip).
 
 # ---------------------------------------------------------
 
-# The following constants can be edited according to the specific location of files, 
+# In the file .printConfig.cfg you need to change your personal information
 # print server and username, eventually printer names.
 
-USER = "username"													# user name on the server
-FOLDER = "/home/username/tisk/"										# location where files are stored on external adress
-SERVER = "anxur.fi.muni.cz"											# server adress
 PRINTER_GRAY = "lj4a"												# printer name for gray-scale printing
 PRINTER_COLOUR = "copy4a"											# printer name for colourful printing
 PRINTER_DUPLEX = "copy4a-duplex -o sides=two-sided-long-edge"		# duplex option
@@ -25,6 +22,7 @@ PRINTER_DUPLEX = "copy4a-duplex -o sides=two-sided-long-edge"		# duplex option
 import os
 import sys
 import re
+import configparser
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -63,10 +61,12 @@ def printFile(file, printer, copies):
 	sftp = ssh.open_sftp()
 
 	# copy the file
+	#print(FOLDER + os.path.basename(file))
 	sftp.put(file, FOLDER + os.path.basename(file))
 
 	# print the file
 	ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command("lpr -P " + printer + " -# " + str(copies) + " " + FOLDER + re.escape(os.path.basename(file)))
+	#print("lpr -P " + printer + " -# " + str(copies) + " " + FOLDER + re.escape(os.path.basename(file)))
 	SSHerrorPrint(ssh_stderr)
 
 	sftp.close()
@@ -82,6 +82,10 @@ if __name__ == '__main__':
 		from scp import SCPClient
 	except ImportError:
 		error("Package 'scp' is required.")
+
+	config = configparser.ConfigParser()
+	config.read('.printConfig.cfg')
+	USER, FOLDER, SERVER = list(zip(*config.items('DEFAULT')))[1]
 
 	if args.number:
 		copies=args.number
