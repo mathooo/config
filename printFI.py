@@ -84,8 +84,9 @@ if __name__ == '__main__':
 		error("Package 'scp' is required.")
 
 	config = configparser.ConfigParser()
-	config.read('.printConfig.cfg')
+	config.read(os.path.dirname(sys.argv[0]) + '/.printConfig.cfg')
 	USER, FOLDER, SERVER = list(zip(*config.items('DEFAULT')))[1]
+	print(USER, FOLDER, SERVER)
 
 	if args.number:
 		copies=args.number
