@@ -15,7 +15,8 @@ The script requires packages paramiko and scp (both can be installed using pip).
 
 PRINTER_GRAY = "lj4a"												# printer name for gray-scale printing
 PRINTER_COLOUR = "copy4a"											# printer name for colourful printing
-PRINTER_DUPLEX = "copy4a-duplex -o sides=two-sided-long-edge"		# duplex option
+PRINTER_DUPLEX = "lj4a-duplex"										# duplex option
+PRINTER_COLOUR_DUPLEX = "copy4a-duplex"								# colourful duplex option
 
 # ---------------------------------------------------------
 
@@ -61,12 +62,12 @@ def printFile(file, printer, copies):
 	sftp = ssh.open_sftp()
 
 	# copy the file
-	#print(FOLDER + os.path.basename(file))
+	# print(FOLDER + os.path.basename(file))
 	sftp.put(file, FOLDER + os.path.basename(file))
 
 	# print the file
 	ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command("lpr -P " + printer + " -# " + str(copies) + " " + FOLDER + re.escape(os.path.basename(file)))
-	#print("lpr -P " + printer + " -# " + str(copies) + " " + FOLDER + re.escape(os.path.basename(file)))
+	# print("lpr -P " + printer + " -# " + str(copies) + " " + FOLDER + re.escape(os.path.basename(file)))
 	SSHerrorPrint(ssh_stderr)
 
 	sftp.close()
@@ -95,7 +96,7 @@ if __name__ == '__main__':
 
 	if args.colour:
 		if args.duplex:
-			printFile(args.file, PRINTER_DUPLEX, copies)
+			printFile(args.file, PRINTER_COLOUR_DUPLEX, copies)
 		else:
 			printFile(args.file, PRINTER_COLOUR, copies)
 	else:
