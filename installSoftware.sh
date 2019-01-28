@@ -23,4 +23,4 @@ sudo apt-get -y install gedit chromium-browser gparted htop texlive-full subvers
 # fi
 
 # Unicode stuff:
-# place .XCompose to home
+# place .XCompose and .xprofile to home
